@@ -1,7 +1,7 @@
 import random
-import auth
-import api_task_requests
-from custom_exception_check import trigger_starttime_log
+from . import auth
+from . import api_task_requests
+from .custom_exception_check import trigger_starttime_log
 
 
 def random_string() -> str:

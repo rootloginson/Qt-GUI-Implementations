@@ -1,7 +1,7 @@
 import requests
 import base64
 from urllib.parse import urlencode
-from custom_exception_check import CustomRequestExceptionCheck
+from .custom_exception_check import CustomRequestExceptionCheck
 
 
 class Tokens(CustomRequestExceptionCheck):

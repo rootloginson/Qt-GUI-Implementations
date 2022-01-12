@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QApplication, QWidget
 from PyQt5 import uic
-import demo_get_track
+from src import demo_get_track
 
 
 class StatusVisual():

@@ -1,5 +1,5 @@
 import requests
-from custom_exception_check import CustomRequestExceptionCheck
+from .custom_exception_check import CustomRequestExceptionCheck
 from urllib.parse import urlencode
 
 
