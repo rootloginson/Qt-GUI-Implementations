@@ -121,14 +121,13 @@ class UI(QWidget):
         self.pushButton_client_secret_confirm.setEnabled(True)
         # Modify  :  label  :  retrieve_track_artist etc.
         # Hide    :  widget :  retrieve_track_widget
-        self.reset_track_indo_labels()
+        self.reset_track_into_labels()
         self.retrieve_track_widget.hide()
 
     def btn_clicked_authorization_test_now(self):
         r = demo_get_track.gui_auth_check(self.client_id, self.client_secret)
         if r == 200:
             self.auth_succession_status_call()
-
         else:
             self.auth_failed_status_call()
 
@@ -144,7 +143,7 @@ class UI(QWidget):
         # Set  :  instance variable  :  test_confirmation_status
         self.test_confirmation_status = True
         # Show  :  widget :  retrieve_track_widget
-        self.reset_track_indo_labels()
+        self.reset_track_into_labels()
         self.retrieve_track_widget.show()
 
     def auth_failed_status_call(self):
@@ -167,7 +166,7 @@ class UI(QWidget):
             else:
                 self.auth_failed_status_call()
 
-    def reset_track_indo_labels(self):
+    def reset_track_into_labels(self):
         self.label_retrieve_track_artist.setText('Artist')
         self.label_retrieve_track_album.setText('Album')
         self.label_retrieve_track_song.setText('Song')
