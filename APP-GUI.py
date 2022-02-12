@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QApplication, QWidget
 from PyQt5 import uic
 from src import demo_get_track
 from src.custom_exception_check import trigger_starttime_log
+from src.database import update_db
 
 
 class StatusVisual:
@@ -199,12 +200,14 @@ class UI(QWidget):
     def btn_clicked_retrieve_track(self):
         if self.test_confirmation_status:
             # if test is successful
-            received = demo_get_track.run_spotify_app(self.client_credential_access_token)
+            received_track_details = demo_get_track.run_spotify_app(self.client_credential_access_token)
 
-            if isinstance(received, dict):
+            if isinstance(received_track_details, dict):  # a defensive control
                 StatusVisual.retrieve_track_button(self.pushButton_retrieve_track)
-                self.set_track_info_labels(received)
+                self.set_track_info_labels(received_track_details)
                 StatusVisual.finalized_track_button(self.pushButton_retrieve_track)
+                # update the database
+                update_db(received_track_details)
             else:
                 self.auth_failed_status_call()
 
@@ -242,7 +245,8 @@ def startApp():
     myapp = UI()
     myapp.show()
     exit_val = app.exec_()
-    trigger_starttime_log("Spotify App terminated")
+
+    trigger_starttime_log(f"Spotify App terminated. exit_val={exit_val}")
     sys.exit(exit_val)
 
 
