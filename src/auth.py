@@ -49,7 +49,6 @@ class Tokens:
         -> Call request_client_credential_access_token method
                 Returns a header that contains access token.
     """
-
     def create_base64encoded_auth_value(self,
                                         client_id,
                                         client_secret) -> str:
