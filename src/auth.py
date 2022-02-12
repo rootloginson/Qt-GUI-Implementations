@@ -5,16 +5,19 @@ from .custom_exception_check import request_call_with_exception_check
 
 
 class StringCodecs(ABC):
+    """Blueprint for adding new codecs"""
+
     @classmethod
     @abstractmethod
-    def encode_with_xyz_method(self, s: str):
-        pass
+    def encode(cls, s: str):
+        raise NotImplementedError
 
 
 class Base64Codec(StringCodecs):
     """Requires "base64" library"""
+
     @classmethod
-    def encode(self, s: str):
+    def encode(cls, s: str):
         """
         Argument :
             s (str) : UTF8 encoded string
@@ -32,20 +35,14 @@ class Tokens:
     The tokens in the Token class :
 
         1. Access Token for "Client Credentials Flow"
-        2. Authorization Code Flow (abbrv. is acf)
-            i)   Authorization access url
-            ii)  Refresh Token via (i)
-            iii) Access Token with scope via (i) > (ii)
-                    > access token for adding tracks to playlist
 
     Requires :
         client_id     : Developer's client id
         client_secret : Developer's client secret
-        redirect_uri  : This is defined by the developer.
-                        *** It is not the redirected url ***
 
 
-    A refresh token is required for requests that require user permission.
+    (Another token type refresh token is required for requests
+     that require user permission.)
 
     How to obtain a token to make track search and receive datas from Spotify:
 
