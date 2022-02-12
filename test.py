@@ -1,4 +1,4 @@
-from unittest
+import unittest
 from src.auth import Base64Codec
 from src.auth import Tokens
 
@@ -22,6 +22,3 @@ class TestAuth(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
-
-
