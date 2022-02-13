@@ -1,9 +1,11 @@
 from PyQt5.QtWidgets import QApplication, QWidget
 from PyQt5 import uic
 from src import demo_get_track
+from src.custom_exception_check import trigger_starttime_log
+from src.database import update_db
 
 
-class StatusVisual():
+class StatusVisual:
     @staticmethod
     def empty_label(other):
         other.setText("Empty")
@@ -26,6 +28,7 @@ class StatusVisual():
 
     @staticmethod
     def retrieve_track_button(other):
+        """If the retrieving track process takes time"""
         other.setStyleSheet("background-color: #bfd7e3; color:rgb(0, 0, 0);")
         other.setText("Retrieving...")
 
@@ -40,29 +43,51 @@ class UI(QWidget):
         super().__init__()
         uic.loadUi("qt-user-interface/get_random_track_user_interface.ui", self)
 
+                ### Initialize: Authorization Attributes ###
         self.client_id = None
         self.client_secret = None
-        # Disable  :  button  :  "Test_Now".
-        self.pushButton_test_now.setEnabled(False)
+        self.client_credential_access_token = None
+
         # Set  : test_confirmation_status
         self.test_confirmation_status = False
+
+                ### Initialize: GUI Variables ###
+
+        # Disable  :  button  :  "Test_Now".
+        self.pushButton_test_now.setEnabled(False)
+
         # Hide  :  widget :  retrieve_track_widget
         self.retrieve_track_widget.hide()
+
         # button connections of auth
         self.auth_button_connections()
 
     def auth_button_connections(self):
+        # "Confirm" button of Client ID
         self.pushButton_client_id_confirm.clicked.connect(self.btn_clicked_authorization_client_id_confirm)
+
+        # "Confirm" of Client Secret
         self.pushButton_client_secret_confirm.clicked.connect(self.btn_clicked_authorization_client_secret_confirm)
+
+        # "Reset" button
         self.pushButton_client_reset.clicked.connect(self.btn_clicked_authorization_client_reset)
+
+        # "Test Now" button
         self.pushButton_test_now.clicked.connect(self.btn_clicked_authorization_test_now)
+
+        # "Retrieve Track" button
+        # "Turn the Wheel" button
+        # The label name of the "Retrieve Track" button was later
+        # changed to the label name "Turn the Wheel".
         self.pushButton_retrieve_track.clicked.connect(self.btn_clicked_retrieve_track)
 
-    def reset_client_id_and_client_secret_and_test_confirmation_status(self):
+    def reset_authorization_attributes(self):
         self.client_id = None
         self.client_secret = None
         self.test_confirmation_status = False
+        self.client_credential_access_token = None
 
+    # "Confirm" button of Client ID
     def btn_clicked_authorization_client_id_confirm(self):
         # Get  :  lineEdit  :  Text  : lineEdit: "Client ID"
         # Set  :  instance variable  : "client_id"
@@ -80,6 +105,7 @@ class UI(QWidget):
             StatusVisual.pending_label(self.label_client_status_active)
             self.pushButton_test_now.setEnabled(True)
 
+    # "Confirm" button of Client Secret
     def btn_clicked_authorization_client_secret_confirm(self):
         # Get  :  lineEdit  :  Text  :  "Client Secret".
         # Set  :  instance variable  :  "client_secret".
@@ -97,9 +123,10 @@ class UI(QWidget):
             StatusVisual.pending_label(self.label_client_status_active)
             self.pushButton_test_now.setEnabled(True)
 
+    # "Reset" button
     def btn_clicked_authorization_client_reset(self):
         # Reset  :  instance variables  : "client_id" and "client_secret" and "test_confirmation_status"
-        self.reset_client_id_and_client_secret_and_test_confirmation_status()
+        self.reset_authorization_attributes()
 
         # Modify Visuals  :  label  :  "Status".
         StatusVisual.empty_label(self.label_client_status_active)
@@ -119,55 +146,72 @@ class UI(QWidget):
         self.pushButton_test_now.setEnabled(False)
         self.pushButton_client_id_confirm.setEnabled(True)
         self.pushButton_client_secret_confirm.setEnabled(True)
+
         # Modify  :  label  :  retrieve_track_artist etc.
         # Hide    :  widget :  retrieve_track_widget
-        self.reset_track_indo_labels()
+        self.reset_track_info_labels()
         self.retrieve_track_widget.hide()
 
+    # "Test Now" button
     def btn_clicked_authorization_test_now(self):
         r = demo_get_track.gui_auth_check(self.client_id, self.client_secret)
-        if r == 200:
-            self.auth_succession_status_call()
 
+        if r is None:
+            self.auth_failed_status_call()
+        elif r.status_code == 200:
+            # Set : instance variable : client_credential_access_token
+            self.client_credential_access_token = r.json()['access_token']
+            self.auth_succession_status_call()
         else:
             self.auth_failed_status_call()
 
     def auth_succession_status_call(self):
+        """Updates visuals if authorization is successful."""
         labels = (
             self.label_client_status_active,
             self.label_test_now
         )
         # Modify Visuals  :  label  :  "Test Now", Client "Status"
         _ = list(map(StatusVisual.accepted_label, labels))
+
         # Disable  :  button  :  "Test Now".
         self.pushButton_test_now.setEnabled(False)
+
         # Set  :  instance variable  :  test_confirmation_status
         self.test_confirmation_status = True
+
         # Show  :  widget :  retrieve_track_widget
-        self.reset_track_indo_labels()
+        self.reset_track_info_labels()
         self.retrieve_track_widget.show()
 
     def auth_failed_status_call(self):
+        """Updates visuals if authorization fails."""
         labels = (
             self.label_client_status_active,
             self.label_test_now
         )
         # Modify Visuals  :  label  :  "Test Now", Client "Status"
         _ = list(map(StatusVisual.failed_label, labels))
+
         # Set  :  instance variable  :  test_confirmation_status
         self.test_confirmation_status = False
 
+    # Get Random Track
     def btn_clicked_retrieve_track(self):
         if self.test_confirmation_status:
-            received = demo_get_track.run_spotify_app(self.client_id, self.client_secret)
-            if isinstance(received, dict):
+            # if test is successful
+            received_track_details = demo_get_track.run_spotify_app(self.client_credential_access_token)
+
+            if isinstance(received_track_details, dict):  # a defensive control
                 StatusVisual.retrieve_track_button(self.pushButton_retrieve_track)
-                self.set_track_info_labels(received)
+                self.set_track_info_labels(received_track_details)
                 StatusVisual.finalized_track_button(self.pushButton_retrieve_track)
+                # update the database
+                update_db(received_track_details)
             else:
                 self.auth_failed_status_call()
 
-    def reset_track_indo_labels(self):
+    def reset_track_info_labels(self):
         self.label_retrieve_track_artist.setText('Artist')
         self.label_retrieve_track_album.setText('Album')
         self.label_retrieve_track_song.setText('Song')
@@ -191,9 +235,20 @@ class UI(QWidget):
         self.label_retrieve_track_url.setOpenExternalLinks(True)
 
 
-if __name__ == "__main__":
+def startApp():
     import sys
+
+    # adds approximate function call time(GMT 0:00 format) to log file.
+    trigger_starttime_log("Spotify App executed")
+
     app = QApplication(sys.argv)
     myapp = UI()
     myapp.show()
-    sys.exit(app.exec_())
+    exit_val = app.exec_()
+
+    trigger_starttime_log(f"Spotify App terminated. exit_val={exit_val}")
+    sys.exit(exit_val)
+
+
+if __name__ == "__main__":
+    startApp()

@@ -1,0 +1,46 @@
+2022-02-12 14:26:48,730 : INFO : src.custom_exception_check : Spotify App executed. (time format: gmtime)
+2022-02-12 14:27:24,490 : INFO : src.custom_exception_check : gui_auth_check. (time format: gmtime)
+2022-02-12 14:27:24,664 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Tokens.request_client_credential_access_token
+2022-02-12 14:27:25,776 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Spochastify.make_track_search
+2022-02-12 14:27:27,641 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Spochastify.make_track_search
+2022-02-12 14:27:28,923 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Spochastify.make_track_search
+2022-02-12 14:27:30,386 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Spochastify.make_track_search
+2022-02-12 14:27:32,242 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Spochastify.make_track_search
+2022-02-12 14:27:33,786 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Spochastify.make_track_search
+2022-02-12 14:27:37,946 : ERROR : src.custom_exception_check : request_status=FAILED, requests.exception=ConnectionError, request_from=Spochastify.make_track_search
+2022-02-12 14:27:48,834 : INFO : src.custom_exception_check : gui_auth_check. (time format: gmtime)
+2022-02-12 14:27:48,842 : ERROR : src.custom_exception_check : request_status=FAILED, requests.exception=ConnectionError, request_from=Tokens.request_client_credential_access_token
+2022-02-12 14:28:00,482 : INFO : src.custom_exception_check : gui_auth_check. (time format: gmtime)
+2022-02-12 14:28:00,634 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Tokens.request_client_credential_access_token
+2022-02-12 14:28:01,927 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Spochastify.make_track_search
+2022-02-12 14:28:03,461 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Spochastify.make_track_search
+2022-02-12 14:28:04,532 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Spochastify.make_track_search
+2022-02-12 14:28:05,505 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Spochastify.make_track_search
+2022-02-12 14:28:05,680 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Spochastify.make_track_search
+2022-02-12 14:28:06,827 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Spochastify.make_track_search
+2022-02-12 14:28:07,962 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Spochastify.make_track_search
+2022-02-12 14:28:08,918 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Spochastify.make_track_search
+2022-02-12 14:28:09,838 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Spochastify.make_track_search
+2022-02-12 14:28:10,737 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Spochastify.make_track_search
+2022-02-12 14:28:11,649 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Spochastify.make_track_search
+2022-02-12 14:28:12,390 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Spochastify.make_track_search
+2022-02-12 14:28:12,579 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Spochastify.make_track_search
+2022-02-12 14:28:13,334 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Spochastify.make_track_search
+2022-02-12 14:28:13,657 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Spochastify.make_track_search
+2022-02-12 14:28:13,893 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Spochastify.make_track_search
+2022-02-12 14:28:14,093 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Spochastify.make_track_search
+2022-02-12 14:28:14,305 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Spochastify.make_track_search
+2022-02-12 14:28:15,533 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Spochastify.make_track_search
+2022-02-12 14:28:16,145 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Spochastify.make_track_search
+2022-02-12 14:28:17,468 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Spochastify.make_track_search
+2022-02-12 14:28:17,659 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Spochastify.make_track_search
+2022-02-12 14:28:23,431 : INFO : src.custom_exception_check : Spotify App terminated. exit_val=0. (time format: gmtime)
+2022-02-13 17:56:45,573 : INFO : src.custom_exception_check : Spotify App executed. (time format: gmtime)
+2022-02-13 17:56:54,206 : INFO : src.custom_exception_check : gui_auth_check. (time format: gmtime)
+2022-02-13 17:56:54,369 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Tokens.request_client_credential_access_token
+2022-02-13 17:56:55,163 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Spochastify.make_track_search
+2022-02-13 17:56:55,457 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Spochastify.make_track_search
+2022-02-13 17:56:55,636 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Spochastify.make_track_search
+2022-02-13 17:56:55,812 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Spochastify.make_track_search
+2022-02-13 17:56:56,048 : INFO : src.custom_exception_check : request_status=SUCCESS, status_code=200, request_from=Spochastify.make_track_search
+2022-02-13 17:56:56,235 : INFO : src.custom_exception_check : Spotify App terminated. exit_val=0. (time format: gmtime)
